@@ -1,0 +1,39 @@
+{
+  "numbers": [
+    {
+      "normal_number": 2,
+      "divisor": 2,
+      "divided": 1.0
+    },
+    {
+      "normal_number": 300,
+      "divisor": 2,
+      "divided": 150.0
+    },
+    {
+      "normal_number": 125,
+      "divisor": 2,
+      "divided": 62.5
+    },
+    {
+      "normal_number": 150,
+      "divisor": 2,
+      "divided": 75.0
+    },
+    {
+      "normal_number": 545,
+      "divisor": 2,
+      "divided": 272.5
+    },
+    {
+      "normal_number": 12,
+      "divisor": 2,
+      "divided": 6.0
+    },
+    {
+      "normal_number": 54.3,
+      "divisor": 2,
+      "divided": 27.15
+    }
+  ]
+}

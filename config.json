@@ -1,4 +1,13 @@
 {
-  "filename": "./others.json",
-  "toDivide": 2
+  "filename": "./numbers.json",
+  "divisor": 2,
+  "numbers": [
+    2,
+    300,
+    125,
+    150,
+    545,
+    12,
+    54.3
+  ]
 }

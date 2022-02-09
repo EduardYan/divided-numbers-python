@@ -5,56 +5,21 @@ This is a file for make a test
 with python.
 """
 
-from json import load, dumps
+from json import load, dumps 
+from json.decoder import JSONDecodeError
 from textwrap import indent
 from rich.panel import Panel
 from rich.console import Console
 # from sys import getsizeof
 
 
-def get_numbers(type:str='normal'):
+def get_numbers():
 	"""
-	Return a tuple
-	withe two numberic values to use.
-
-	Recive the type of numbers
-	to return.
-
+	Return the list of numbers to use.
 	"""
 
-	type_numbers_availables = [
-		'normal',
-		'float',
-	]
-
-	# validating the type
-	if type not in type_numbers_availables:
-		raise TypeError(f'The type for return the number not is valid. Valid values {type_numbers_availables}')
-
-	if type == type_numbers_availables[0]:
-		n1 = 6
-		n2 = 2
-
-	if type == type_numbers_availables[1]:
-		n1 = float(6)
-		n2 = float(2)
-
-	return n1, n2
-
-
-def get_numbers_iter():
-	"""
-	Return a iterator with numbers.
-	"""
-
-	yield 5
-	yield 2
-	yield 3
-	yield 12
-	yield 200
-	yield 25
-	yield 30
-
+	numbers_list = CONFIG['numbers']
+	return numbers_list
 
 
 def get_object_number(normal_number:int, divided:float, divisor:float) -> dict:
@@ -72,7 +37,6 @@ def get_object_number(normal_number:int, divided:float, divisor:float) -> dict:
 	}
 
 
-
 def get_numbers_divide() -> list:
 	"""
 	Return a list
@@ -82,22 +46,22 @@ def get_numbers_divide() -> list:
 	# to save the numbers divided objects
 	numbers_divided = []
 
-	to_divide = load(open('config.json'))['toDivide']
-	for number in get_numbers_iter():
+	to_divide = CONFIG['divisor']
+	for number in get_numbers():
 		try:
 			divided = number / to_divide
 			# getting the number object and adding
 			object = get_object_number(number, divided, to_divide)
 
 			numbers_divided.append(object)
-			del number
+			del number # not use more
 
 		# errors catched
 		except ValueError:
-			print('The number to divide the numbers not is valid. Verify the file config.py')
+			console.print('[red bold]The number to divide the numbers not is valid. Verify the file config.json[/[')
 
 		except TypeError:
-			print('The number to divide the numbers not is valid. Verify the file config.py')
+			console.print('[red bold]The number to divide the numbers not is valid. Verify the file config.json[/]')
 
 
 	return numbers_divided
@@ -121,19 +85,29 @@ def main():
 	Principal function to execute.
 	"""
 
-	filename = load(open('config.json'))['filename']
+	# getting values to save
+	filename = CONFIG['filename']
 	numbers_divided = get_numbers_divide()
 
 	try:
 		# saving
 		save_in_file(filename, numbers_divided)
-		console = Console()
 		panel = Panel(f'[green]:thumbs_up: Saved in "{filename}"[/]', title  = '[bold blue]Save Numbers[/]')
 		console.print(panel)
 		
 	except:
-		print('Some problem to save the file.')
+		console.print('[red bold]Some problem to save the file Verify the file of configuration.[/]')
+
 
 
 if __name__ == '__main__':
-	main()
+	# getting console for show messages
+	console = Console()
+	try:
+		# loading configuration
+		CONFIG = load(open('./config.json'))
+		# console to use for show message
+		main()
+
+	except JSONDecodeError:
+		console.print('[red bold]Some problem with syntax or other for read the file of configuration.[/]')
