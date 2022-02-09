@@ -15,7 +15,7 @@ __Cloning the repository and install dependencies.__
 ```bash
 git clone https://EduardYan/divided-numbers-python.git
 
-cd divided-number-python
+cd divided-numbers-python
 
 ```
 
