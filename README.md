@@ -67,6 +67,11 @@ python3 main.py
 ```
 
 And the numbers divided, is in the filename in the config file.
+![output-image](./doc/output-image.png)
+
+
+## Screenshot.
+![screenshot](./doc/screenshot.png)
 
 
 ## Errors or Bugs.

@@ -22,6 +22,7 @@ def get_numbers():
 	return numbers_list
 
 
+
 def get_object_number(normal_number:int, divided:float, divisor:float) -> dict:
 	"""
 	Return the object
